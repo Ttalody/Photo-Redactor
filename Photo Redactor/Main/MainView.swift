@@ -42,8 +42,14 @@ final class MainView: UITabBarController, UITabBarControllerDelegate {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.delegate = self
         setupTabs()
         configureTabBar()
+    }
+    
+    // MARK: - Delagate func
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        self.title = viewModel.getNavigationBarTitle(at: selectedIndex)
     }
 }
 

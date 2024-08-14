@@ -9,8 +9,8 @@ import UIKit
 
 final class SettingsBuilder {
     static func build() -> UIViewController? {
-        let settingsViewModel: SettingsViewModel = .init()
         let settingsModel: SettingsModel = .init()
+        let settingsViewModel: SettingsViewModel = .init(model: settingsModel)
         let view: SettingsView = .init(viewModel: settingsViewModel)
         return view
     }

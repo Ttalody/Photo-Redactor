@@ -8,7 +8,12 @@
 import Foundation
 
 final class MainViewModel {
-    func getTabTitles() {
-        
+    func getNavigationBarTitle(at index: Int) -> String {
+        switch index {
+        case 1:
+            "Settings"
+        default:
+            ""
+        }
     }
 }
