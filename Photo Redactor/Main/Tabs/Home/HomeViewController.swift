@@ -17,6 +17,15 @@ class HomeViewController: UIViewController {
         enum CropView {
             static let borderWidth: CGFloat = 2
             static let borderColor: CGColor = UIColor.yellow.cgColor
+            static let width: CGFloat = 300
+            static let height: CGFloat = 500
+        }
+        
+        enum Titles {
+            static let selectPhoto = "Select photo"
+            static let save = "Save"
+            static let original = "Original"
+            static let blackAndWhite = "Black-and-white"
         }
     }
     
@@ -42,7 +51,7 @@ class HomeViewController: UIViewController {
         let label = UILabel()
         label.numberOfLines = .zero
         label.font = UIFont.systemFont(ofSize: 24)
-        label.text = "Select photo"
+        label.text = Constants.Titles.selectPhoto
         return label
     }()
     
@@ -55,7 +64,7 @@ class HomeViewController: UIViewController {
     
     private lazy var saveButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Save", for: .normal)
+        button.setTitle(Constants.Titles.save, for: .normal)
         button.setImage(Constants.Icon.saveIconImage, for: .normal)
         button.imageView?.contentMode = .scaleAspectFit
         button.addTarget(self, action: #selector(saveAction), for: .touchUpInside)
@@ -68,6 +77,15 @@ class HomeViewController: UIViewController {
         view.layer.borderColor = Constants.CropView.borderColor
         view.backgroundColor = .clear
         return view
+    }()
+    
+    private let imageStyleSegmentedConrtol: UISegmentedControl = {
+        let segmentedControl = UISegmentedControl()
+        segmentedControl.insertSegment(withTitle: Constants.Titles.original, at: .zero, animated: true)
+        segmentedControl.insertSegment(withTitle: Constants.Titles.blackAndWhite, at: 1, animated: true)
+        segmentedControl.selectedSegmentIndex = .zero
+        segmentedControl.addTarget(self, action: #selector(segmentDidChange), for: .valueChanged)
+        return segmentedControl
     }()
     
     // MARK: - Init
@@ -115,16 +133,20 @@ private extension HomeViewController {
         setupInitialView()
         setupCropAreaView()
         setupSelectedImageImageView()
-        
-        setupConstraints()
+        setupImageStyleSegmentedConrtol()
     }
     
     func setupBindings() {
         viewModel.didUpdateImage = { [weak self] in
             self?.initialStackView.isHidden = true
+            self?.imageStyleSegmentedConrtol.isHidden = false
             self?.cropAreaView.isHidden = false
             self?.selectedImageImageView.isHidden = false
             self?.selectedImageImageView.image = self?.viewModel.getImage()
+        }
+        
+        viewModel.filteredImage = { [weak self] image in
+            self?.selectedImageImageView.image = image
         }
     }
     
@@ -138,6 +160,17 @@ private extension HomeViewController {
         let leading = initialStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor)
         let trailing = initialStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         NSLayoutConstraint.activate([vertical, leading, trailing])
+    }
+    
+    func setupImageStyleSegmentedConrtol() {
+        view.addSubview(imageStyleSegmentedConrtol)
+        
+        imageStyleSegmentedConrtol.isHidden = true
+        imageStyleSegmentedConrtol.translatesAutoresizingMaskIntoConstraints = false
+        
+        let bottom = imageStyleSegmentedConrtol.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -Grid.Spacing.m)
+        let horizontal = imageStyleSegmentedConrtol.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        NSLayoutConstraint.activate([bottom, horizontal])
     }
     
     func setupSelectedImageImageView() {
@@ -164,8 +197,8 @@ private extension HomeViewController {
         
         let horizontal = cropAreaView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         let vertical = cropAreaView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-        let width = cropAreaView.widthAnchor.constraint(equalToConstant: 300)
-        let height = cropAreaView.heightAnchor.constraint(equalToConstant: 500)
+        let width = cropAreaView.widthAnchor.constraint(equalToConstant: Constants.CropView.width)
+        let height = cropAreaView.heightAnchor.constraint(equalToConstant: Constants.CropView.height)
         NSLayoutConstraint.activate([vertical, horizontal, width, height])
         
     }
@@ -176,9 +209,6 @@ private extension HomeViewController {
         maskLayer.path = path.cgPath
         
         cropAreaView.layer.mask = maskLayer
-    }
-    
-    func setupConstraints() {
     }
     
     // MARK: - Setup Gertures
@@ -226,6 +256,11 @@ private extension HomeViewController {
     @objc
     func addPhotoAction() {
         viewModel.requestPhotoLibraryAccess(from: self)
+    }
+    
+    @objc
+    func segmentDidChange() {
+        viewModel.applyFilter(option: imageStyleSegmentedConrtol.selectedSegmentIndex)
     }
     
     // MARK: - Setup NavigationBar

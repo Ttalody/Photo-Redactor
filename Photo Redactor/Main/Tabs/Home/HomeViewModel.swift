@@ -12,10 +12,12 @@ final class HomeViewModel: NSObject, UIImagePickerControllerDelegate & UINavigat
     
     // MARK: - Properties
     var didUpdateImage: (() -> Void)?
+    var filteredImage: ((UIImage?) -> Void)?
     
+    private var model: HomeModel
     private var pickerController: UIImagePickerController?
     
-    private var model: HomeModel {
+    private var originalImage: UIImage? {
         didSet {
             self.didUpdateImage?()
         }
@@ -29,35 +31,49 @@ final class HomeViewModel: NSObject, UIImagePickerControllerDelegate & UINavigat
     // MARK: - Public methods
     func requestPhotoLibraryAccess(from viewController: UIViewController) {
         let status = PHPhotoLibrary.authorizationStatus()
-        if status == .notDetermined {
+        switch status {
+        case .authorized:
+            DispatchQueue.main.async {
+                self.openPhotoLibrary(from: viewController)
+            }
+        default:
             PHPhotoLibrary.requestAuthorization { newStatus in
                 if newStatus == .authorized {
                     DispatchQueue.main.async {
                         self.openPhotoLibrary(from: viewController)
                     }
-                } else {
-                    // Обработка случая, когда доступ не предоставлен
                 }
             }
-        } else if status == .authorized {
-            openPhotoLibrary(from: viewController)
-        } else {
-            // Обработка случая, когда доступ не предоставлен
         }
     }
     
     func getImage() -> UIImage {
-        guard let image = model.image else {
+        guard let image = originalImage else {
             return .init()
         }
         return image
+    }
+    
+    func applyFilter(option: Int) {
+        guard let originalImage else {
+            return
+        }
+        switch option {
+        case 0:
+            filteredImage?(originalImage)
+        case 1:
+            let filteredImage = model.applyFilter(to: originalImage, filterName: "CIPhotoEffectMono")
+            self.filteredImage?(filteredImage)
+        default:
+            break
+        }
     }
     
     // MARK: - UIImagePickerControllerDelegate & UINavigationControllerDelegate
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true, completion: nil)
         if let selectedImage = info[.originalImage] as? UIImage {
-            self.model.image = selectedImage
+            self.originalImage = selectedImage
         }
     }
     
