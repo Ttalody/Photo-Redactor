@@ -9,8 +9,8 @@ import UIKit
 
 final class HomeBuilder {
     static func build() -> UIViewController? {
-        let homeViewModel: HomeViewModel = .init()
         let homeModel: HomeModel = .init()
+        let homeViewModel: HomeViewModel = .init(model: homeModel)
         let view: HomeViewController = .init(viewModel: homeViewModel)
         return view
     }

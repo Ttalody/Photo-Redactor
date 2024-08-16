@@ -9,6 +9,7 @@ import Foundation
 
 enum Grid {
     enum Spacing {
+        static let s: CGFloat = 8
         static let m: CGFloat = 16
     }
 }

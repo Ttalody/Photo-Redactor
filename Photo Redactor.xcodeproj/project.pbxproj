@@ -97,9 +97,9 @@
 			isa = PBXGroup;
 			children = (
 				75B10DE92C6A2FBD000C13B0 /* HomeBuilder.swift */,
+				75B10DE72C6A2EF1000C13B0 /* HomeModel.swift */,
 				75B10DD42C6A2A65000C13B0 /* HomeViewController.swift */,
 				75B10DE52C6A2EC7000C13B0 /* HomeViewModel.swift */,
-				75B10DE72C6A2EF1000C13B0 /* HomeModel.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -108,9 +108,9 @@
 			isa = PBXGroup;
 			children = (
 				75B10DEC2C6A3243000C13B0 /* Tabs */,
+				75B10DF12C6A32F7000C13B0 /* MainBuilder.swift */,
 				75B10DED2C6A32AC000C13B0 /* MainView.swift */,
 				75B10DEF2C6A32EC000C13B0 /* MainViewModel.swift */,
-				75B10DF12C6A32F7000C13B0 /* MainBuilder.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -128,10 +128,10 @@
 			isa = PBXGroup;
 			children = (
 				75B10DFC2C6A5B98000C13B0 /* View */,
+				75B10DFA2C6A566C000C13B0 /* SettingsBuilder.swift */,
+				75B10DF82C6A5658000C13B0 /* SettingsModel.swift */,
 				75B10DF42C6A5642000C13B0 /* SettingsView.swift */,
 				75B10DF62C6A564D000C13B0 /* SettingsViewModel.swift */,
-				75B10DF82C6A5658000C13B0 /* SettingsModel.swift */,
-				75B10DFA2C6A566C000C13B0 /* SettingsBuilder.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -156,8 +156,8 @@
 		75B10E002C6BD479000C13B0 /* Supplements */ = {
 			isa = PBXGroup;
 			children = (
-				75B10E012C6BD48A000C13B0 /* UITableViewCell.swift */,
 				75B10E062C6BD731000C13B0 /* UITableView.swift */,
+				75B10E012C6BD48A000C13B0 /* UITableViewCell.swift */,
 			);
 			path = Supplements;
 			sourceTree = "<group>";
