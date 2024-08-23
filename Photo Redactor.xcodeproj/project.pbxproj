@@ -16,7 +16,6 @@
 		75B10DE82C6A2EF1000C13B0 /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B10DE72C6A2EF1000C13B0 /* HomeModel.swift */; };
 		75B10DEA2C6A2FBD000C13B0 /* HomeBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B10DE92C6A2FBD000C13B0 /* HomeBuilder.swift */; };
 		75B10DEE2C6A32AC000C13B0 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B10DED2C6A32AC000C13B0 /* MainView.swift */; };
-		75B10DF02C6A32EC000C13B0 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B10DEF2C6A32EC000C13B0 /* MainViewModel.swift */; };
 		75B10DF22C6A32F7000C13B0 /* MainBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B10DF12C6A32F7000C13B0 /* MainBuilder.swift */; };
 		75B10DF52C6A5642000C13B0 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B10DF42C6A5642000C13B0 /* SettingsView.swift */; };
 		75B10DF72C6A564D000C13B0 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B10DF62C6A564D000C13B0 /* SettingsViewModel.swift */; };
@@ -26,6 +25,7 @@
 		75B10E022C6BD48A000C13B0 /* UITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B10E012C6BD48A000C13B0 /* UITableViewCell.swift */; };
 		75B10E052C6BD4C4000C13B0 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B10E042C6BD4C4000C13B0 /* Grid.swift */; };
 		75B10E072C6BD732000C13B0 /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B10E062C6BD731000C13B0 /* UITableView.swift */; };
+		75B10E0E2C78A42D000C13B0 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B10E0D2C78A42D000C13B0 /* MainViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,7 +40,6 @@
 		75B10DE72C6A2EF1000C13B0 /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
 		75B10DE92C6A2FBD000C13B0 /* HomeBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBuilder.swift; sourceTree = "<group>"; };
 		75B10DED2C6A32AC000C13B0 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
-		75B10DEF2C6A32EC000C13B0 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		75B10DF12C6A32F7000C13B0 /* MainBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainBuilder.swift; sourceTree = "<group>"; };
 		75B10DF42C6A5642000C13B0 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		75B10DF62C6A564D000C13B0 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
@@ -50,6 +49,7 @@
 		75B10E012C6BD48A000C13B0 /* UITableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewCell.swift; sourceTree = "<group>"; };
 		75B10E042C6BD4C4000C13B0 /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		75B10E062C6BD731000C13B0 /* UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableView.swift; sourceTree = "<group>"; };
+		75B10E0D2C78A42D000C13B0 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,7 +110,7 @@
 				75B10DEC2C6A3243000C13B0 /* Tabs */,
 				75B10DF12C6A32F7000C13B0 /* MainBuilder.swift */,
 				75B10DED2C6A32AC000C13B0 /* MainView.swift */,
-				75B10DEF2C6A32EC000C13B0 /* MainViewModel.swift */,
+				75B10E0D2C78A42D000C13B0 /* MainViewModel.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -252,6 +252,7 @@
 				75B10DFE2C6A5BAA000C13B0 /* SettingCell.swift in Sources */,
 				75B10DD12C6A2A65000C13B0 /* AppDelegate.swift in Sources */,
 				75B10DD32C6A2A65000C13B0 /* SceneDelegate.swift in Sources */,
+				75B10E0E2C78A42D000C13B0 /* MainViewModel.swift in Sources */,
 				75B10DF52C6A5642000C13B0 /* SettingsView.swift in Sources */,
 				75B10DFB2C6A566C000C13B0 /* SettingsBuilder.swift in Sources */,
 				75B10DF22C6A32F7000C13B0 /* MainBuilder.swift in Sources */,
@@ -260,7 +261,6 @@
 				75B10DE82C6A2EF1000C13B0 /* HomeModel.swift in Sources */,
 				75B10DF72C6A564D000C13B0 /* SettingsViewModel.swift in Sources */,
 				75B10DE62C6A2EC7000C13B0 /* HomeViewModel.swift in Sources */,
-				75B10DF02C6A32EC000C13B0 /* MainViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

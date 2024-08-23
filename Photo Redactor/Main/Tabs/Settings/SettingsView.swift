@@ -10,6 +10,7 @@ import UIKit
 final class SettingsView: UIViewController {
     enum Constants {
         static let alertActionTitle = "Close"
+        static let title = "Settings"
     }
     
     // MARK: - Properties
@@ -83,6 +84,7 @@ private extension SettingsView {
     // MARK: - Setup
     func setupView() {
         view.backgroundColor = .white
+        title = Constants.title
         
         view.addSubview(settingsTableView)
         
@@ -100,7 +102,7 @@ private extension SettingsView {
     
     func setupNavigationBar() {
         let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = .secondarySystemBackground
+        appearance.backgroundColor = .clear
         appearance.shadowColor = .clear
         appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.black, .font: UIFont.systemFont(ofSize: 32, weight: .bold)]
         navigationController?.navigationBar.prefersLargeTitles = true

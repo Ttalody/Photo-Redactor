@@ -7,10 +7,10 @@
 
 import UIKit
 
-final class MainView: UITabBarController, UITabBarControllerDelegate {
+final class MainView: UITabBarController {
     private enum Constants {
-        static let homeIconImage = UIImage(systemName: "house")
-        static let settingsIconImage = UIImage(systemName: "gear")
+        static let homeIconImage: UIImage = UIImage(systemName: "house")!
+        static let settingsIconImage: UIImage = UIImage(systemName: "gear")!
         
         static let homeTitle = "Home"
         static let settingsTitle = "Settings"
@@ -42,40 +42,35 @@ final class MainView: UITabBarController, UITabBarControllerDelegate {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.delegate = self
         setupTabs()
         configureTabBar()
-    }
-    
-    // MARK: - Delagate func
-    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-        self.title = viewModel.getNavigationBarTitle(at: selectedIndex)
     }
 }
 
 // MARK: - Private methods
 private extension MainView {
     func setupTabs() {
-        let firstViewController = HomeBuilder.build()
-        let secondViewController = SettingsBuilder.build()
-        
         guard
-            let firstViewController = firstViewController,
-            let secondViewController = secondViewController
+            let firstViewController = HomeBuilder.build(),
+            let secondViewController = SettingsBuilder.build()
         else {
             return
         }
         
-        firstViewController.tabBarItem = UITabBarItem(
+        let homeVC = createNavigationChain(
             title: Constants.homeTitle,
-            image: Constants.homeIconImage, tag: 0)
-        secondViewController.tabBarItem = UITabBarItem(
+            image: Constants.homeIconImage,
+            vc: firstViewController
+        )
+        let settingsVC = createNavigationChain(
             title: Constants.settingsTitle,
-            image: Constants.settingsIconImage, tag: 1)
+            image: Constants.settingsIconImage,
+            vc: secondViewController
+        )
         
         viewControllers = [
-            firstViewController,
-            secondViewController
+            homeVC,
+            settingsVC
         ]
     }
     
@@ -83,5 +78,14 @@ private extension MainView {
         tabBar.barStyle = .default
         tabBar.backgroundColor = .white
         tabBar.addSubview(topBorder)
+    }
+    
+    func createNavigationChain(title: String, image: UIImage, vc: UIViewController) -> UINavigationController {
+        let navigationController = UINavigationController(rootViewController: vc)
+        
+        navigationController.tabBarItem.title = title
+        navigationController.tabBarItem.image = image
+        
+        return navigationController
     }
 }

@@ -8,7 +8,7 @@
 import UIKit
 
 final class MainBuilder {
-    static func build() -> UIViewController {
+    static func build() -> UITabBarController {
         let viewModel: MainViewModel = .init()
         let view: MainView = .init(viewModel: viewModel)
         return view
