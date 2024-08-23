@@ -9,6 +9,9 @@ import UIKit
 import Photos
 
 final class HomeViewModel: NSObject, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+    private enum Constants {
+        static let filterName: String = "CIPhotoEffectMono"
+    }
     
     // MARK: - Properties
     var didUpdateImage: (() -> Void)?
@@ -59,10 +62,10 @@ final class HomeViewModel: NSObject, UIImagePickerControllerDelegate & UINavigat
             return
         }
         switch option {
-        case 0:
+        case .zero:
             filteredImage?(originalImage)
         case 1:
-            let filteredImage = model.applyFilter(to: originalImage, filterName: "CIPhotoEffectMono")
+            let filteredImage = model.applyFilter(to: originalImage, filterName: Constants.filterName)
             self.filteredImage?(filteredImage)
         default:
             break

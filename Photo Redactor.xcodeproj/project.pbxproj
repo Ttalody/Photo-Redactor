@@ -26,6 +26,7 @@
 		75B10E052C6BD4C4000C13B0 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B10E042C6BD4C4000C13B0 /* Grid.swift */; };
 		75B10E072C6BD732000C13B0 /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B10E062C6BD731000C13B0 /* UITableView.swift */; };
 		75B10E0E2C78A42D000C13B0 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B10E0D2C78A42D000C13B0 /* MainViewModel.swift */; };
+		75B10E102C78CD61000C13B0 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B10E0F2C78CD61000C13B0 /* UIImage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		75B10E042C6BD4C4000C13B0 /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		75B10E062C6BD731000C13B0 /* UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableView.swift; sourceTree = "<group>"; };
 		75B10E0D2C78A42D000C13B0 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		75B10E0F2C78CD61000C13B0 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +160,7 @@
 			children = (
 				75B10E062C6BD731000C13B0 /* UITableView.swift */,
 				75B10E012C6BD48A000C13B0 /* UITableViewCell.swift */,
+				75B10E0F2C78CD61000C13B0 /* UIImage.swift */,
 			);
 			path = Supplements;
 			sourceTree = "<group>";
@@ -259,6 +262,7 @@
 				75B10E072C6BD732000C13B0 /* UITableView.swift in Sources */,
 				75B10E052C6BD4C4000C13B0 /* Grid.swift in Sources */,
 				75B10DE82C6A2EF1000C13B0 /* HomeModel.swift in Sources */,
+				75B10E102C78CD61000C13B0 /* UIImage.swift in Sources */,
 				75B10DF72C6A564D000C13B0 /* SettingsViewModel.swift in Sources */,
 				75B10DE62C6A2EC7000C13B0 /* HomeViewModel.swift in Sources */,
 			);

@@ -26,6 +26,10 @@ class HomeViewController: UIViewController {
             static let save = "Save"
             static let original = "Original"
             static let blackAndWhite = "Black-and-white"
+            static let success = "Success!"
+            static let error = "Error"
+            static let alertSuccessMessage = "Image saved to Photos."
+            static let ok = "OK"
         }
     }
     
@@ -68,6 +72,7 @@ class HomeViewController: UIViewController {
         button.setImage(Constants.Icon.saveIconImage, for: .normal)
         button.imageView?.contentMode = .scaleAspectFit
         button.addTarget(self, action: #selector(saveAction), for: .touchUpInside)
+        button.isHidden = true
         return button
     }()
     
@@ -142,6 +147,7 @@ private extension HomeViewController {
             self?.imageStyleSegmentedConrtol.isHidden = false
             self?.cropAreaView.isHidden = false
             self?.selectedImageImageView.isHidden = false
+            self?.saveButton.isHidden = false
             self?.selectedImageImageView.image = self?.viewModel.getImage()
         }
         
@@ -250,7 +256,8 @@ private extension HomeViewController {
     // MARK: - Button Actions
     @objc
     func saveAction() {
-        
+        guard let croppedImage = cropImageToFrame() else { return }
+        UIImageWriteToSavedPhotosAlbum(croppedImage, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
     }
     
     @objc
@@ -263,6 +270,49 @@ private extension HomeViewController {
         viewModel.applyFilter(option: imageStyleSegmentedConrtol.selectedSegmentIndex)
     }
     
+    // MARK: - Image manipulations
+    func cropImageToFrame() -> UIImage? {
+        guard let image = selectedImageImageView.image else { return nil }
+        
+        let imageViewSize = selectedImageImageView.bounds.size
+        let imageSize = image.size
+        
+        let scaleWidth = imageSize.width / imageViewSize.width
+        let scaleHeight = imageSize.height / imageViewSize.height
+        let scale = max(scaleWidth, scaleHeight)
+        
+        let cropFrame = view.convert(cropAreaView.frame, to: selectedImageImageView)
+        
+        let transformedFrame = cropFrame.applying(selectedImageImageView.transform)
+        
+        let scaledCropRect = CGRect(
+            x: transformedFrame.origin.x * scale,
+            y: transformedFrame.origin.y * scale,
+            width: transformedFrame.size.width * scale,
+            height: transformedFrame.size.height * scale
+        )
+        
+        guard let croppedCGImage = image.cgImage?.cropping(to: scaledCropRect) else { return nil }
+        let croppedImage = UIImage(cgImage: croppedCGImage)
+        
+        let finalImage = croppedImage.apply(transform: selectedImageImageView.transform)
+        
+        return finalImage
+    }
+    
+    @objc
+    func image(_ image: UIImage, didFinishSavingWithError error: NSError?, contextInfo: UnsafeRawPointer) {
+        if let error = error {
+            let ac = UIAlertController(title: Constants.Titles.error, message: error.localizedDescription, preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: Constants.Titles.ok, style: .default))
+            present(ac, animated: true)
+        } else {
+            let ac = UIAlertController(title: Constants.Titles.success, message: Constants.Titles.alertSuccessMessage, preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: Constants.Titles.ok, style: .default))
+            present(ac, animated: true)
+        }
+    }
+    
     // MARK: - Setup NavigationBar
     func setupNavigationBar() {
         let appearance = UINavigationBarAppearance()
@@ -272,7 +322,7 @@ private extension HomeViewController {
         navigationController?.navigationBar.prefersLargeTitles = false
         
         let saveBarButtonItem = UIBarButtonItem(customView: saveButton)
-        navigationItem.rightBarButtonItems?.append(saveBarButtonItem)
+        navigationItem.rightBarButtonItem = saveBarButtonItem
     }
 }
 
